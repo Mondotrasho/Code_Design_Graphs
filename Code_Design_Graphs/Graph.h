@@ -1,6 +1,7 @@
 
 #pragma once
 #include <vector>
+#include <functional>
 
 
 // graphs
@@ -27,6 +28,11 @@ namespace Graph {
 		// list of edges
 		std::vector<Graph::Edge*> edges;
 		std::vector<Vertex> m_vertices;
+		//get
+		std::vector<Vertex>::iterator getfirst()
+		{
+			return m_vertices.begin();
+		}
 		//add
 		void add_edge(Vertex* vertex);
 		void add_vertex(Vertex& vertex);
@@ -36,12 +42,27 @@ namespace Graph {
 
 		// custom user data (alternative to deriving)
 		void* userData = nullptr;
+
+
 	};
 
 
-	
+	Vertex* depthFirstSearch(Vertex* start,std::function<bool(Vertex*)> predicate);
+	Vertex* breadthFirstSearch(Vertex* start,std::function<bool(Vertex*)> predicate);
 
 
+	// testFunction AND TestClass WOULD BE DECLARED AHEAD OF TIME
+	bool testFunction(Graph::Vertex* vertex) {
+		/* put test / comparison code here */
+	}
+	class TestClass {
+	public:
+		TestClass() {}
+		~TestClass() {}
+		bool operator ()(Graph::Vertex* vertex) {
+			/* perform test / comparison code here */
+		}
+	};
 	
 
 }
